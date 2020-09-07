@@ -1,0 +1,27 @@
+{
+  "name": "wallpaper-clock",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "node-cron": "^2.0.3",
+    "node-html-to-image": "^3.0.1",
+    "uuid": "^8.3.0",
+    "wallpaper": "^4.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danba340/wallpaper-clock.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danba340/wallpaper-clock/issues"
+  },
+  "homepage": "https://github.com/danba340/wallpaper-clock#readme"
+}
