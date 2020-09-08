@@ -3,9 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="Description" content="A Simple Analog Clock" />
-    <meta name="theme-color" content="#091921" />
-    <title>Analog Clock</title>
+    <meta name="Description" content="A JS Clock suitable for wallpaper" />
+    <title>Wallpaper Clock</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Arvo&display=swap"
+      rel="stylesheet"
+    />
     <style>
       * {
         margin: 0;
@@ -18,24 +21,20 @@
         justify-content: center;
         align-items: center;
         min-height: 100vh;
-        background: #090909;
-        background: #07141b;
+        background: #101315;
         width: 1920px;
         height: 1080px;
-      }
-
-      body.light {
-        background: #d1dae3;
+        color: white;
+        font-family: "Arvo", serif;
       }
 
       .clock {
-        width: 375px;
-        height: 375px;
+        width: 400px;
+        height: 400px;
         display: flex;
         justify-content: center;
         align-items: center;
         border: 4px;
-        /* box-shadow: 15px 15px 15px rgba(255, 255, 255, 0.5); */
         box-shadow: 0em -1.2em 1.2em rgba(255, 255, 255, 0.06),
           inset 0em -1.2em 1.2em rgba(255, 255, 255, 0.06),
           0em 1.2em 1.2em rgba(0, 0, 0, 0.3),
@@ -43,36 +42,14 @@
         border-radius: 50%;
       }
 
-      body.light .clock {
-        box-shadow: 0em -1.2em 1.2em rgba(255, 255, 255, 0.3),
-          inset 1em 1em -1em rgba(255, 255, 255, 0.3),
-          0em -1.2em -1.2em rgba(0, 0, 0, 0.5),
-          inset 1em -1em 1em rgba(0, 0, 0, 0.1);
-      }
-
-      .clock :hover {
-        /* yet to be completed; when hovered, diplay complete information about time, `new Date().toLocaleString();` */
-        cursor: pointer;
-      }
-
-      /* The small circle int the center */
       .clock:before {
         content: "";
         position: absolute;
         width: 15px;
         height: 15px;
-        background: rgb(255, 255, 255);
+        background: #ccc;
         border-radius: 50%;
-
-        /* The z-index property specifies the stack order of an element.
-    /* An element with greater stack order is always in front of an element with a lower stack order.  */
-        /* Note: z-index only works on positioned elements (position: absolute, position: relative, position: fixed, or position: sticky). */
-        z-index: 10000;
-        /* kept as a high value, since wanted at top */
-      }
-
-      body.light .clock:before {
-        background: #1a74be;
+        z-index: 100;
       }
 
       .clock .hour,
@@ -80,52 +57,60 @@
         position: absolute;
       }
 
-      /* length of respective arms; */
       .clock .hour,
-      .hr {
+      #h {
         width: 160px;
         height: 160px;
       }
 
       .clock .min,
-      .mn {
+      #m {
         width: 190px;
         height: 190px;
       }
 
-      .hr,
-      .mn {
+      #h,
+      #m {
         display: flex;
         justify-content: center;
-        /* align-items: center; */
         position: absolute;
         border-radius: 50%;
       }
 
-      .hr:before {
+      #h:before {
         content: "";
         position: absolute;
-        width: 7.5px;
+        width: 5px;
         height: 80px;
-        background: #f81460;
+        background: #ff47a0;
+        box-shadow: 0 0 6px 2px #ff47a0;
         z-index: 10;
-        /* z-index least */
         border-radius: 2.8px;
       }
 
-      .mn:before {
+      #m:before {
         content: "";
         position: absolute;
         width: 3.5px;
         height: 100px;
-        background: #ffffff;
+        background: #48ceff;
+        box-shadow: 0 0 6px 2px #48ceff;
         z-index: 11;
-        /* z-index more than hour hand */
         border-radius: 3px;
       }
-
-      body.light .mn:before {
-        background: #091921;
+      #digital {
+        font-size: 80px;
+        color: #48ceff;
+      }
+      #digital .spacer {
+        display: inline-block;
+        width: 80px;
+      }
+      #digital .digit {
+        display: inline-block;
+        min-width: 100px;
+        text-align: center;
+        border-radius: 10px;
       }
     </style>
   </head>
@@ -133,34 +118,32 @@
   <body>
     <div class="clock">
       <div class="hour">
-        <div class="hr" id="hr"></div>
+        <div id="h"></div>
       </div>
 
       <div class="min">
-        <div class="mn" id="mn"></div>
+        <div id="m"></div>
       </div>
+      <div id="digital"></div>
     </div>
     <script>
-      // for time;
-      const deg = 6;
-      // 360 / (12 * 5);
+      const $h = document.querySelector("#h");
+      const $m = document.querySelector("#m");
+      const $digital = document.querySelector("#digital");
 
-      const hr = document.querySelector("#hr");
-      const mn = document.querySelector("#mn");
+      const degPerMinute = 6; // angle for one minute
 
-      setInterval(() => {
-        let day = new Date();
-        let hh = day.getHours() * 30;
-        let mm = day.getMinutes() * deg;
+      let now = new Date();
+      let h = now.getHours();
+      let m = now.getMinutes();
 
-        // VERY IMPORTANT STEP:
+      $digital.innerHTML = `<span class="digit">${h}</span><span class="spacer"></span><span class="digit">${m}</span>`;
 
-        hr.style.transform = `rotateZ(${hh + mm / 12}deg)`;
-        mn.style.transform = `rotateZ(${mm}deg)`;
+      let hDeg = h * 30;
+      let mDeg = m * degPerMinute;
 
-        // gives the smooth transitioning effect, but there's a bug here!
-        // sc.style.transition = `1s`;
-      });
+      $h.style.transform = `rotateZ(${hDeg + mDeg / 12}deg)`;
+      $m.style.transform = `rotateZ(${mDeg}deg)`;
     </script>
   </body>
 </html>
