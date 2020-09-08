@@ -1,5 +1,8 @@
 # wallpaper-clock
 
+A live clock wallpaper using Node.js
+![preview](preview.png)
+
 ## Run on startup with pm2
 
 ```
