@@ -1,149 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="Description" content="A JS Clock suitable for wallpaper" />
-    <title>Wallpaper Clock</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Arvo&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
 
-      body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        background: #101315;
-        width: 1920px;
-        height: 1080px;
-        color: white;
-        font-family: "Arvo", serif;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="Description" content="A JS Clock suitable for wallpaper" />
+  <title>Wallpaper Clock</title>
+  <link href="https://fonts.googleapis.com/css2?family=Arvo&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-      .clock {
-        width: 400px;
-        height: 400px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 4px;
-        box-shadow: 0em -1.2em 1.2em rgba(255, 255, 255, 0.06),
-          inset 0em -1.2em 1.2em rgba(255, 255, 255, 0.06),
-          0em 1.2em 1.2em rgba(0, 0, 0, 0.3),
-          inset 0em 1.2em 1.2em rgba(0, 0, 0, 0.3);
-        border-radius: 50%;
-      }
+    body {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      min-height: 100vh;
+      background: #101315;
+      width: 1920px;
+      height: 1080px;
+      color: white;
+      font-family: "Arvo", serif;
+    }
 
-      .clock:before {
-        content: "";
-        position: absolute;
-        width: 15px;
-        height: 15px;
-        background: #ccc;
-        border-radius: 50%;
-        z-index: 100;
-      }
+    .clock {
+      width: 400px;
+      height: 400px;
+      margin-left: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 4px;
+      box-shadow: 0em -1.2em 1.2em rgba(255, 255, 255, 0.06),
+        inset 0em -1.2em 1.2em rgba(255, 255, 255, 0.06),
+        0em 1.2em 1.2em rgba(0, 0, 0, 0.3),
+        inset 0em 1.2em 1.2em rgba(0, 0, 0, 0.3);
+      border-radius: 50%;
+    }
 
-      .clock .hour,
-      .clock .min {
-        position: absolute;
-      }
+    .clock:before {
+      content: "";
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: #ccc;
+      border-radius: 50%;
+      z-index: 100;
+    }
 
-      .clock .hour,
-      #h {
-        width: 160px;
-        height: 160px;
-      }
+    .clock .hour,
+    .clock .min {
+      position: absolute;
+    }
 
-      .clock .min,
-      #m {
-        width: 190px;
-        height: 190px;
-      }
+    .clock .hour,
+    #h {
+      width: 160px;
+      height: 160px;
+    }
 
-      #h,
-      #m {
-        display: flex;
-        justify-content: center;
-        position: absolute;
-        border-radius: 50%;
-      }
+    .clock .min,
+    #m {
+      width: 190px;
+      height: 190px;
+    }
 
-      #h:before {
-        content: "";
-        position: absolute;
-        width: 5px;
-        height: 80px;
-        background: #ff47a0;
-        box-shadow: 0 0 6px 2px #ff47a0;
-        z-index: 10;
-        border-radius: 2.8px;
-      }
+    #h,
+    #m {
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      border-radius: 50%;
+    }
 
-      #m:before {
-        content: "";
-        position: absolute;
-        width: 3.5px;
-        height: 100px;
-        background: #48ceff;
-        box-shadow: 0 0 6px 2px #48ceff;
-        z-index: 11;
-        border-radius: 3px;
-      }
-      #digital {
-        font-size: 80px;
-        color: #48ceff;
-      }
-      #digital .spacer {
-        display: inline-block;
-        width: 80px;
-      }
-      #digital .digit {
-        display: inline-block;
-        min-width: 100px;
-        text-align: center;
-        border-radius: 10px;
-      }
-    </style>
-  </head>
+    #h:before {
+      content: "";
+      position: absolute;
+      width: 5px;
+      height: 80px;
+      background: #ff47a0;
+      box-shadow: 0 0 6px 2px #ff47a0;
+      z-index: 10;
+      border-radius: 2.8px;
+    }
 
-  <body>
-    <div class="clock">
-      <div class="hour">
-        <div id="h"></div>
-      </div>
+    #m:before {
+      content: "";
+      position: absolute;
+      width: 3.5px;
+      height: 100px;
+      background: #48ceff;
+      box-shadow: 0 0 6px 2px #48ceff;
+      z-index: 11;
+      border-radius: 3px;
+    }
 
-      <div class="min">
-        <div id="m"></div>
-      </div>
-      <div id="digital"></div>
+    #digital {
+      font-size: 80px;
+      color: #48ceff;
+    }
+
+    #digital .spacer {
+      display: inline-block;
+      width: 80px;
+    }
+
+    #digital .digit {
+      display: inline-block;
+      min-width: 100px;
+      text-align: center;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="clock">
+    <div class="hour">
+      <div id="h"></div>
     </div>
-    <script>
-      const $h = document.querySelector("#h");
-      const $m = document.querySelector("#m");
-      const $digital = document.querySelector("#digital");
 
-      const degPerMinute = 6; // angle for one minute
+    <div class="min">
+      <div id="m"></div>
+    </div>
+    <div id="digital"></div>
+  </div>
+  <script>
+    const $h = document.querySelector("#h");
+    const $m = document.querySelector("#m");
+    const $digital = document.querySelector("#digital");
 
-      let now = new Date();
-      let h = now.getHours();
-      let m = now.getMinutes();
+    const degPerMinute = 6; // angle for one minute
 
-      $digital.innerHTML = `<span class="digit">${h}</span><span class="spacer"></span><span class="digit">${m}</span>`;
+    let now = new Date();
+    let h = now.getHours();
+    let m = now.getMinutes();
 
-      let hDeg = h * 30;
-      let mDeg = m * degPerMinute;
+    $digital.innerHTML = `<span class="digit">${h < 10 ? "0" + h : h}</span><span class="spacer"></span><span class="digit">${m < 10 ? "0" + m : m}</span>`;
 
-      $h.style.transform = `rotateZ(${hDeg + mDeg / 12}deg)`;
-      $m.style.transform = `rotateZ(${mDeg}deg)`;
-    </script>
-  </body>
+    let hDeg = h * 30;
+    let mDeg = m * degPerMinute;
+
+    $h.style.transform = `rotateZ(${hDeg + mDeg / 12}deg)`;
+    $m.style.transform = `rotateZ(${mDeg}deg)`;
+  </script>
+</body>
+
 </html>
