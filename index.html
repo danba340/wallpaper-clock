@@ -137,7 +137,11 @@
       let h = now.getHours();
       let m = now.getMinutes();
 
-      $digital.innerHTML = `<span class="digit">${h}</span><span class="spacer"></span><span class="digit">${m}</span>`;
+      $digital.innerHTML = `<span class="digit">${
+        h < 10 ? "0" + h : h
+      }</span><span class="spacer"></span><span class="digit">${
+        m < 10 ? "0" + m : m
+      }</span>`;
 
       let hDeg = h * 30;
       let mDeg = m * degPerMinute;

@@ -5,15 +5,15 @@ const wallpaper = require("wallpaper");
 const cron = require("node-cron");
 const { v4: uuidv4 } = require("uuid");
 
+// Read html file
+const html = fs.readFileSync("./index.html", function (err, html) {
+  if (err) {
+    throw err;
+  }
+  return html;
+});
 // Running every minute
 cron.schedule("* * * * *", () => {
-  // Read html file
-  const html = fs.readFileSync("./index.html", function (err, html) {
-    if (err) {
-      throw err;
-    }
-    return html;
-  });
   // Generate a unique name for new wallpaper
   const imgPath = `./wallpaperclock${uuidv4()}.png`;
 
